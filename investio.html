@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Invest.IO</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+        </head>
+        <style>
+            *{
+                font-family: 'Quicksand', sans-serif;
+            }
+
+            #header{
+                width: 100%;
+                padding: 25px 150px 10px 150px;
+                box-sizing: border-box;
+                font-size: 50px;
+                text-align: center;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+            }
+
+            #body_cont{
+                padding: 0px 50px;
+                box-sizing: border-box;
+                display: flex;
+            }
+
+            #left-div{
+                width: 40%;
+            }
+            
+            #right-div{
+                width: 50%;
+                margin: 0 auto;
+            }
+
+            .sub-header{
+                width: 100%;
+                text-align: center;
+                font-size: 30px;
+                padding: 20px;
+                box-sizing: border-box;
+                font-weight: 800;
+            }
+
+            #counter{
+                margin-left: auto;
+                font-size: 40px;
+                display: flex;
+                align-items: center;
+            }
+
+            .element-to-buy{
+                padding: 20px;
+                font-size: 25px;
+            }
+
+            #shop-elements{
+                border-top: 1px black solid;
+                margin-bottom: 10px;
+            }
+            #stocks-elements{
+                border-top: 1px black solid;
+            }
+
+            .income-stocks-elements-div{
+                border: 1px solid black;
+                border-radius: 10px;
+            }
+
+            #total-income{
+                width: 80%;
+                box-sizing: border-box;
+                border-top: 1px solid black;
+                text-align: center;
+                color: green;
+                font-size: 30px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            #total-stocks-value{
+                width: 80%;
+                box-sizing: border-box;
+                border-top: 1px solid black;
+                text-align: center;
+                color: green;
+                font-size: 30px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            #no-income{
+                text-align: center;
+                padding: 20px;
+                font-size: 20px;
+            }
+
+            #no-stocks{
+                text-align: center;
+                padding: 20px;
+                font-size: 20px;
+            }
+
+
+            .buy-button{
+                background-color: rgb(0, 105, 0);
+                border: 3px solid rgb(0, 105, 0);
+                border-radius: 5px;
+                color: white;
+                font-size: 20px;
+                transition: all .2s;
+                cursor: pointer;
+                padding: 5px 15px;
+                display: inherit;
+            }
+
+            .buy-button:hover{
+                background-color: white;
+                color: rgb(0, 105, 0);
+            }
+
+            tr, td{
+                padding: 10px;
+            }
+
+            .bank-single-asset{
+                display: flex;
+                justify-content: space-between;
+                font-size: 25px;
+                padding: 10px 15px;
+                align-items: center;
+            }
+
+            .benefits{
+                color: green;
+            }
+
+            .num_assets{
+                display: inline-block;
+            }
+
+            .total_income_assets{
+                display: inline-block;
+            }
+
+            .main_input_amount{
+                margin-left: 5px;
+                font-size: 20px;
+                border-top: 0;
+                border-left: 0;
+                border-right: 0;
+                outline: none;
+                transition: all .5s;
+                width: 50px;
+            }
+
+            .main_input_amount:focus{
+                border-bottom: 2px solid rgb(90, 90, 255);
+            }
+
+            .stocks-pc{
+                font-size: 20px;
+            }
+
+            .button_sell_stock{
+                margin-left: 10px;
+                background-color: rgb(250, 50, 50);
+                border: 3px solid rgb(250, 50, 50);
+                border-radius: 5px;
+                color: white;
+                font-size: 20px;
+                transition: all .2s;
+                cursor: pointer;
+                padding: 5px 15px;
+            }
+
+            .button_sell_stock:hover{
+                background-color: white;
+                color: rgb(250, 50, 50);
+            }
+
+            @media only screen and (max-width: 1500px) {
+                #body_cont{
+                    display: block;
+                }
+
+                #left-div{
+                    width: 100%;
+                }
+
+                #right-div {
+                    width: 100%;
+                    padding-bottom: 40px;
+                }
+              }
+
+
+        </style>
+        <body>
+
+        <div id="header">Invest.IO<div id="counter"><i style="font-size: 30px; margin-right: 30px; color: grey;">Bank: </i><div id="bank-money">100000</div>$</div></div>
+
+        <div id="body_cont">
+
+            <div id="left-div">
+                <div class="sub-header">Shop</div>
+                <div id="shop-elements">
+                <table style="width: 100%;">
+                    <tr class="element-to-buy">
+                            <td>Degree</td> <td style="color:green; font-weight: 800;">+0.2 $/s</td><td style="display: flex;"> <div id="button-buy-degree" class="buy-button">100$</div></td><td><i style="font-size: 15px;">x</i><input class="main_input_amount" type="number" min="1" value="1" id="degree_purshase_amount"></td>
+                    </tr>
+                    <tr class="element-to-buy">
+                            <td>Real Estate</td>  <td style="color:green; font-weight: 800;">+2.5 $/s</td><td><div id="button-buy-realestate" class="buy-button">1,000$</div></td><td><i style="font-size: 15px;">x</i><input class="main_input_amount" type="number" min="1" value="1" id="re_purshase_amount"></td>
+                    </tr>
+                    <tr class="element-to-buy">
+                            <td>Hotel</td> <td style="color:green; font-weight: 800;">+10.0 $/s</td><td><div id="button-buy-hotel" class="buy-button">3,000$</div></td><td><i style="font-size: 15px;">x</i><input class="main_input_amount" type="number" min="1" value="1" id="hotel_purshase_amount"></td>
+                    </tr>
+                    <tr class="element-to-buy">
+                            <td>Company</td> <td style="color:green; font-weight: 800;">+60.0 $/s</td><td><div id="button-buy-company" class="buy-button">15,000$</div></td><td><i style="font-size: 15px;">x</i><input class="main_input_amount" type="number" min="1" value="1" id="comp_purshase_amount"></td>
+                    </tr>
+                    <tr class="element-to-buy">
+                        <td>Large Bank</td> <td style="color:green; font-weight: 800;">+500.0 $/s</td><td><div id="button-buy-bank" class="buy-button">100,000$</div></td><td><i style="font-size: 15px;">x</i><input class="main_input_amount" type="number" min="1" value="1" id="bank_purshase_amount"></td>
+                </tr>
+                </table>
+                </div>
+                <div class="sub-header">Stocks Market</div>
+                <div id="stocks-elements">
+                <table style="width: 100%;">
+                    <tr class="element-to-buy">
+                            <td>Basic Stock</td> <td class="stocks-pc"><div style="color:green; font-weight: 800;">65% --> +0.3%</div><div style="color:red; font-weight: 800;">35% --> -0.1%</div></td><td style="display: flex;"> <div id="button-buy-b-stock" class="buy-button">Buy</div></td><td><input class="main_input_amount" type="number" min="50" value="50" id="b_stock_purshase_amount"><b style="font-size: 15px; font-weight: normal;">$</b></td>
+                    </tr>
+                    <tr class="element-to-buy">
+                            <td>No-Risk Stock</td>  <td class="stocks-pc"><div style="color:green; font-weight: 800;">100% --> +0.15%</div></td><td><div id="button-buy-nr-stock" class="buy-button">Buy</div></td><td><input class="main_input_amount" type="number" min="50" value="50" id="nr_stock_purshase_amount"><b style="font-size: 15px; font-weight: normal;">$</b></td>
+                    </tr>
+                    <tr class="element-to-buy">
+                            <td>Risky Stock</td> <td class="stocks-pc"><div style="color:green; font-weight: 800;">25% --> +1.2%</div><div style="color:red; font-weight: 800;">75% --> -0.2%</div></td><td><div id="button-buy-r-stock" class="buy-button">Buy</div></td><td><input class="main_input_amount" type="number" min="50" value="50" id="r_stock_purshase_amount"><b style="font-size: 15px; font-weight: normal;">$</b></td>
+                    </tr>
+                    <tr class="element-to-buy">
+                            <td>Super Risky Stock</td> <td class="stocks-pc"><div style="color:green; font-weight: 800;">90% --> +0.4%</div><div style="color:red; font-weight: 800;">10% --> -2%</div></td><td><div id="button-buy-sr-stock" class="buy-button">Buy</div></td><td><input class="main_input_amount" type="number" min="50" value="50" id="sr_stock_purshase_amount"><b style="font-size: 15px; font-weight: normal;">$</b></td>
+                    </tr>
+                </table>
+                </div>
+            </div>
+
+            <div id="right-div">
+                <div class="sub-header">Income</div>
+                <div class="income-stocks-elements-div">
+                    <div id="incomes-div">
+                        <div id="no-income"><i>No income for the moment...</i></div>
+                    </div>
+                    <div id="total-income">
+                        +0 $/s
+                    </div>
+                </div>
+                <div class="sub-header">Stocks</div>
+                <div class="income-stocks-elements-div">
+                    <div id="stocks-div">
+                        <div id="no-stocks"><i>No stocks for the moment...</i></div>
+                    </div>
+                    <div id="total-stocks-value">
+                        0$
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <script>
+            var buyDegree = document.getElementById("button-buy-degree");
+            var buyRE = document.getElementById("button-buy-realestate");
+            var buyHotel = document.getElementById("button-buy-hotel");
+            var buyComp = document.getElementById("button-buy-company");
+            var buyBank = document.getElementById("button-buy-bank")
+
+
+            var noIncome = document.getElementById("no-income");
+            var incomes = document.getElementById("incomes-div");
+
+            var bankMoneyDiv = document.getElementById("bank-money");
+
+            var totalIncome = document.getElementById("total-income");
+
+            var degreePurshaseAmount = document.getElementById("degree_purshase_amount");
+            var rePurshaseAmount = document.getElementById("re_purshase_amount");
+            var hotelPurshaseAmount = document.getElementById("hotel_purshase_amount");
+            var compPurshaseAmount = document.getElementById("comp_purshase_amount");
+            var bankPurshaseAmount = document.getElementById("bank_purshase_amount");
+
+            var money = 5000;
+
+            Math.round(money*100)/100
+            var money_net = money.toFixed(2)
+
+            bankMoneyDiv.textContent = parseFloat(money_net).toLocaleString("en-US")
+
+
+            var assets = {
+                "degree" : 0,
+                "re" : 0,
+                "hotel" : 0,
+                "comp" : 0,
+                "bank":0
+            }
+
+            var newDivAssets;
+            
+            var ti = 0;
+            var purshaseAmount;
+
+            function updateIncome(){
+
+                ti = Math.round(((assets["degree"]*0.2) + (assets["re"]*2.5) + (assets["hotel"]*10) + (assets["comp"]*60) + (assets["bank"]*500))*100)/100
+
+                totalIncome.textContent = "+"+ti.toLocaleString("en-US")+" $/s"
+
+            }
+
+            function updateStocksValue(){
+                tsv = Math.round(((stocks_amounts["basic"]) + (stocks_amounts["no-risk"]) + (stocks_amounts["risk"]) + (stocks_amounts["super-risk"]))*100)/100
+
+                totalStocksValue.textContent = tsv.toLocaleString("en-US")+"$"
+            }
+
+            buyDegree.addEventListener("click", function(){
+
+                purshaseAmount = parseInt(degreePurshaseAmount.value);
+
+                if (purshaseAmount > 0){
+                    if (money >= 100*purshaseAmount){
+                        money = money - 100*purshaseAmount
+    
+                        bankMoneyDiv.textContent = parseFloat((Math.round(money*100))/100).toLocaleString("en-US")
+    
+                        assets["degree"] += purshaseAmount;
+    
+                        if(assets["degree"] == purshaseAmount){
+                            noIncome.style.display = "none"
+    
+                            newDivAssets = document.createElement("div")
+    
+                            newDivAssets.innerHTML = "<div class='bank-single-asset'><div><i>Degree</i> (x<div id='degree_num' class='num_assets'>"+(assets["degree"]).toLocaleString("en-US")+"</div>)</div> <div class='benefits'>+<div id='degree_total_income' class='total_income_assets'>"+(assets["degree"]*0.2).toLocaleString("en-US")+"</div> $/s</div> </div>"
+    
+                            incomes.appendChild(newDivAssets)
+                        }
+                        else{
+                            document.getElementById("degree_num").textContent = (assets["degree"]).toLocaleString("en-US");
+                            document.getElementById("degree_total_income").textContent = (Math.round(assets["degree"]*20)/100).toLocaleString("en-US")
+                        }
+                    }
+                    else{
+                        alert("Insufficient capital")
+                    }
+                    updateIncome();
+                }else{
+                    alert("You can only type positive numbers")
+                }
+
+
+            })
+
+
+            buyRE.addEventListener("click", function(){
+
+                purshaseAmount = parseInt(rePurshaseAmount.value);
+
+                if (purshaseAmount > 0){
+                    if (money >= 1000*purshaseAmount){
+                        money = money - 1000*purshaseAmount
+    
+                        bankMoneyDiv.textContent = parseFloat((Math.round(money*100))/100).toLocaleString("en-US")
+    
+                        assets["re"] += purshaseAmount
+    
+                        if(assets["re"] == purshaseAmount){
+                            noIncome.style.display = "none"
+    
+                            newDivAssets = document.createElement("div")
+    
+                            newDivAssets.innerHTML = "<div class='bank-single-asset'><div><i>Real Estate</i> (x<div id='re_num' class='num_assets'>"+(assets["re"]).toLocaleString("en-US")+"</div>)</div> <div class='benefits'>+<div id='re_total_income' class='total_income_assets'>"+(assets["re"]*2.5).toLocaleString("en-US")+"</div> $/s</div> </div>"
+    
+                            incomes.appendChild(newDivAssets)
+                        }
+                        else{
+                            document.getElementById("re_num").textContent = assets["re"].toLocaleString("en-US");
+                            document.getElementById("re_total_income").textContent = (Math.round(assets["re"]*250)/100).toLocaleString("en-US")
+                        }
+                    }
+                    else{
+                        alert("Insufficient capital")
+                    }
+                    updateIncome();
+                }else{
+                    alert("You can only type positive numbers")
+                }
+
+            })
+
+            buyHotel.addEventListener("click", function(){
+
+                purshaseAmount = parseInt(hotelPurshaseAmount.value);
+
+                if (purshaseAmount > 0){
+
+                    if (money >= 3000*purshaseAmount){
+                        money = money - 3000*purshaseAmount
+    
+                        bankMoneyDiv.textContent = parseFloat((Math.round(money*100))/100).toLocaleString("en-US")
+    
+                        assets["hotel"] += purshaseAmount
+    
+                        if(assets["hotel"] == purshaseAmount){
+                            noIncome.style.display = "none"
+    
+                            newDivAssets = document.createElement("div")
+    
+                            newDivAssets.innerHTML = "<div class='bank-single-asset'><div><i>Hotel</i> (x<div id='hotel_num' class='num_assets'>"+(assets["hotel"]).toLocaleString("en-US")+"</div>)</div> <div class='benefits'>+<div id='hotel_total_income' class='total_income_assets'>"+(assets["hotel"]*10).toLocaleString("en-US")+"</div> $/s</div> </div>"
+    
+                            incomes.appendChild(newDivAssets)
+                        }
+                        else{
+                            document.getElementById("hotel_num").textContent = assets["hotel"].toLocaleString("en-US");    
+                            document.getElementById("hotel_total_income").textContent = (Math.round(assets["hotel"]*1000)/100).toLocaleString("en-US")
+                        }
+                    }
+                    else{
+                        alert("Insufficient capital")
+                    }
+                    updateIncome();
+                }else{
+                    alert("You can only type positive numbers")
+                }
+
+
+            })
+
+            buyComp.addEventListener("click", function(){
+
+                purshaseAmount = parseInt(compPurshaseAmount.value);
+
+                if (purshaseAmount > 0){
+                    if (money >= 15000*purshaseAmount){
+                        money = money - 15000*purshaseAmount
+    
+                        bankMoneyDiv.textContent = parseFloat((Math.round(money*100))/100).toLocaleString("en-US")
+    
+                        assets["comp"] += purshaseAmount
+    
+                        if(assets["comp"] == purshaseAmount){
+                            noIncome.style.display = "none"
+    
+                            newDivAssets = document.createElement("div")
+    
+                            newDivAssets.innerHTML = "<div class='bank-single-asset'><div><i>Company</i> (x<div id='comp_num' class='num_assets'>"+(assets["comp"]).toLocaleString("en-US")+"</div>)</div> <div class='benefits'>+<div id='comp_total_income' class='total_income_assets'>"+(assets["comp"]*60).toLocaleString("en-US")+"</div> $/s</div> </div>"
+    
+                            incomes.appendChild(newDivAssets)
+                        }
+                        else{
+                            document.getElementById("comp_num").textContent = assets["comp"].toLocaleString("en-US");    
+                            document.getElementById("comp_total_income").textContent = (Math.round(assets["comp"]*6000)/100).toLocaleString("en-US")
+                        }
+                    }
+                    else{
+                        alert("Insufficient capital")
+                    }
+                    updateIncome();
+                }else{
+                    alert("You can only type positive numbers")
+                }
+
+            })
+
+            buyBank.addEventListener("click", function(){
+
+                purshaseAmount = parseInt(bankPurshaseAmount.value);
+
+                if(purshaseAmount > 0){
+                    if (money >= 100000*purshaseAmount){
+                        money = money - 100000*purshaseAmount
+    
+                        bankMoneyDiv.textContent = parseFloat((Math.round(money*100))/100).toLocaleString("en-US")
+    
+                        assets["bank"] += purshaseAmount
+    
+                        if(assets["bank"] == purshaseAmount){
+                            noIncome.style.display = "none"
+    
+                            newDivAssets = document.createElement("div")
+    
+                            newDivAssets.innerHTML = "<div class='bank-single-asset'><div><i>Large Bank</i> (x<div id='bank_num' class='num_assets'>"+(assets["bank"]).toLocaleString("en-US")+"</div>)</div> <div class='benefits'>+<div id='bank_total_income' class='total_income_assets'>"+(assets["bank"]*500).toLocaleString("en-US")+"</div> $/s</div> </div>"
+    
+                            incomes.appendChild(newDivAssets)
+                        }
+                        else{
+                            document.getElementById("bank_num").textContent = assets["bank"].toLocaleString("en-US");    
+                            document.getElementById("bank_total_income").textContent = (Math.round(assets["bank"]*50000)/100).toLocaleString("en-US")
+                        }
+                    }
+                    else{
+                        alert("Insufficient capital")
+                    }
+                    updateIncome();
+                }else{
+                    alert("You can only type positive numbers")
+                }
+
+            })
+
+            var earnInterval = window.setInterval(updateMoney, 1000);
+
+            //Variations of Stock Value
+
+            var VBS;
+            var VNRS;
+            var VRS;
+            var VSRS;
+
+            function updateMoney() {
+                //ASSETS
+
+                money = Math.round((money + ti)*100)/100
+                var money_net = money.toFixed(2)
+
+                bankMoneyDiv.textContent = parseFloat(money_net).toLocaleString("en-US")
+
+                //STOCKS
+
+                if (stocks_amounts["basic"] != 0){
+                    rBA = Math.random();
+
+                    if (rBA>=0.35){
+                        stocks_amounts["basic"] = stocks_amounts["basic"]*1.003
+                    }
+                    else {
+                        stocks_amounts["basic"] = stocks_amounts["basic"]*0.999
+                    }
+
+                    document.getElementById("b_stock_total_income").textContent = stocks_amounts["basic"].toLocaleString("en-US");
+
+                    VBS = (stocks_amounts["basic"]-parseFloat(document.getElementById("ba_stock_num").textContent.replace(/[^\d.-]/g, "")))
+
+                    if (VBS >= 0){
+                        document.getElementById("variation_b_stock").style.color = "green"
+                        document.getElementById("variation_b_stock").textContent = "+"+VBS.toLocaleString("en-US")+"$"
+
+                    }
+                    else{
+                        document.getElementById("variation_b_stock").style.color = "red"
+                        document.getElementById("variation_b_stock").textContent = VBS.toLocaleString("en-US")+"$"
+                    }
+                }
+                if (stocks_amounts["no-risk"] != 0){
+                    rNR = Math.random();
+                    stocks_amounts["no-risk"] = stocks_amounts["no-risk"]*1.0015
+
+                    document.getElementById("nr_stock_total_income").textContent = stocks_amounts["no-risk"].toLocaleString("en-US");
+
+                    VNRS = (stocks_amounts["no-risk"]-parseFloat(document.getElementById("nr_stock_num").textContent.replace(/[^\d.-]/g, "")))
+
+                    if (VNRS >= 0){
+                        document.getElementById("variation_nr_stock").style.color = "green"
+                        document.getElementById("variation_nr_stock").textContent = "+"+VNRS.toLocaleString("en-US")+"$"
+
+                    }
+                    else{
+                        document.getElementById("variation_nr_stock").style.color = "red"
+                        document.getElementById("variation_nr_stock").textContent = VNRS.toLocaleString("en-US")+"$"
+                    }
+                }
+                if (stocks_amounts["risk"] != 0){
+                    rR = Math.random();
+
+                    if (rR>=0.75){
+                        stocks_amounts["risk"] = stocks_amounts["risk"]*1.012
+                    }
+                    else {
+                        stocks_amounts["risk"] = stocks_amounts["risk"]*0.998
+                    }
+
+                    document.getElementById("r_stock_total_income").textContent = stocks_amounts["risk"].toLocaleString("en-US");
+
+                    VRS = (stocks_amounts["risk"]-parseFloat(document.getElementById("r_stock_num").textContent.replace(/[^\d.-]/g, "")))
+
+                    if (VRS >= 0){
+                        document.getElementById("variation_r_stock").style.color = "green"
+                        document.getElementById("variation_r_stock").textContent = "+"+VRS.toLocaleString("en-US")+"$"
+
+                    }
+                    else{
+                        document.getElementById("variation_r_stock").style.color = "red"
+                        document.getElementById("variation_r_stock").textContent = VRS.toLocaleString("en-US")+"$"
+                    }
+
+                }
+                if (stocks_amounts["super-risk"] != 0){
+                    rSR = Math.random();
+
+                    if (rSR>=0.1){
+                        stocks_amounts["super-risk"] = stocks_amounts["super-risk"]*1.004
+                    }
+                    else {
+                        stocks_amounts["super-risk"] = stocks_amounts["super-risk"]*0.98
+                    }
+
+                    document.getElementById("sr_stock_total_income").textContent = stocks_amounts["super-risk"].toLocaleString("en-US");
+
+                    VSRS = (stocks_amounts["super-risk"]-parseFloat(document.getElementById("sr_stock_num").textContent.replace(/[^\d.-]/g, "")))
+
+                    if (VSRS >= 0){
+                        document.getElementById("variation_sr_stock").style.color = "green"
+                        document.getElementById("variation_sr_stock").textContent = "+"+VSRS.toLocaleString("en-US")+"$"
+
+                    }
+                    else{
+                        document.getElementById("variation_sr_stock").style.color = "red"
+                        document.getElementById("variation_sr_stock").textContent = VSRS.toLocaleString("en-US")+"$"
+                    }
+                }
+                updateStocksValue();
+            }
+            
+            
+
+            //STOCKS
+
+            var stocks_amounts = {
+                "basic" : 0,
+                "no-risk" : 0,
+                "risk" : 0,
+                "super-risk" : 0
+            }
+
+            var buyBStock = document.getElementById("button-buy-b-stock");
+            var buyNRStock = document.getElementById("button-buy-nr-stock");
+            var buyRStock = document.getElementById("button-buy-r-stock");
+            var buySRStock = document.getElementById("button-buy-sr-stock");
+
+            var PA_B = document.getElementById("b_stock_purshase_amount");
+            var PA_NR = document.getElementById("nr_stock_purshase_amount");
+            var PA_R = document.getElementById("r_stock_purshase_amount");
+            var PA_SR = document.getElementById("sr_stock_purshase_amount");
+
+            var stocksDiv = document.getElementById("stocks-div");
+
+            var noStocks = document.getElementById("no-stocks");
+
+            var newDivStocks;
+
+            var ATB;
+
+            var totalStocksValue = document.getElementById("total-stocks-value")
+
+
+            buyBStock.addEventListener("click", function(){
+
+                ATB = parseFloat(PA_B.value);
+
+                if (ATB > 0){
+                    if(money >= ATB){
+
+                        money = money-ATB
+    
+                        stocks_amounts["basic"] += ATB;
+    
+                        if (stocks_amounts["basic"] == ATB){
+    
+                            noStocks.style.display = "none";
+    
+                            newDivStocks = document.createElement("div");
+    
+                            newDivStocks.setAttribute("id", "b_stock_adquired")
+    
+                            newDivStocks.innerHTML = "<div class='bank-single-asset'><div><i>Basic Stock</i> (<div id='ba_stock_num' class='num_assets'>"+(stocks_amounts["basic"]).toLocaleString("en-US")+"</div>$)</div> <div class='benefits' style='color: black; display: flex; align-items: center;'><div id='b_stock_total_income' class='total_income_assets'>"+(stocks_amounts["basic"]).toLocaleString("en-US")+"</div>$ (<b id='variation_b_stock'></b>)<div id='sell_b_stocks' class='button_sell_stock'>Sell</div></div></div>"
+    
+                            stocksDiv.appendChild(newDivStocks)
+    
+                            document.getElementById("variation_b_stock").textContent = (stocks_amounts["basic"]-parseFloat(document.getElementById("ba_stock_num").textContent.replace(/[^\d.-]/g, ""))).toLocaleString("en-US")+"$"
+    
+                            document.getElementById("sell_b_stocks").addEventListener("click", function(){
+                                money += stocks_amounts["basic"];
+                                stocks_amounts["basic"] = 0;
+                                document.getElementById("b_stock_adquired").remove();
+                                if((stocks_amounts["basic"]==0) && (stocks_amounts["no-risk"]==0) && (stocks_amounts["risk"]==0) && (stocks_amounts["super-risk"]==0)){
+                                    noStocks.style.display = "block";
+                                }
+                                updateStocksValue();
+                            })
+    
+                        }
+                        else{
+                            document.getElementById("b_stock_total_income").textContent = stocks_amounts["basic"].toLocaleString("en-US");
+                            document.getElementById("ba_stock_num").textContent = (parseFloat(document.getElementById("ba_stock_num").textContent.replace(/[^\d.-]/g, "")) + ATB).toLocaleString("en-US")
+                        }
+                        updateStocksValue();
+                    }
+    
+                    else{
+                        alert("Insufficient capital")
+                    }
+                } else{
+                    alert("You can only type positive numbers")
+                }
+
+            })
+
+
+            buyNRStock.addEventListener("click", function(){
+
+                ATB = parseFloat(PA_NR.value);
+
+                if (ATB > 0){
+                    if(money >= ATB){
+
+                        money = money-ATB
+    
+                        stocks_amounts["no-risk"] += ATB;
+    
+                        if (stocks_amounts["no-risk"] == ATB){
+    
+                            noStocks.style.display = "none";
+    
+                            newDivStocks = document.createElement("div");
+    
+                            newDivStocks.setAttribute("id", "nr_stock_adquired")
+    
+                            newDivStocks.innerHTML = "<div class='bank-single-asset'><div><i>No-Risk Stock</i> (<div id='nr_stock_num' class='num_assets'>"+(stocks_amounts["no-risk"]).toLocaleString("en-US")+"</div>$)</div> <div class='benefits' style='color: black; display: flex; align-items: center;'><div id='nr_stock_total_income' class='total_income_assets'>"+(stocks_amounts["no-risk"]).toLocaleString("en-US")+"</div>$ (<b id='variation_nr_stock'></b>)<div id='sell_nr_stocks' class='button_sell_stock'>Sell</div></div></div>"
+    
+                            stocksDiv.appendChild(newDivStocks)
+    
+                            document.getElementById("variation_nr_stock").textContent = (stocks_amounts["no-risk"]-parseFloat(document.getElementById("nr_stock_num").textContent.replace(/[^\d.-]/g, ""))).toLocaleString("en-US")+"$"
+    
+                            document.getElementById("sell_nr_stocks").addEventListener("click", function(){
+                                money += stocks_amounts["no-risk"];
+                                stocks_amounts["no-risk"] = 0;
+                                document.getElementById("nr_stock_adquired").remove();
+                                if((stocks_amounts["basic"]==0) && (stocks_amounts["no-risk"]==0) && (stocks_amounts["risk"]==0) && (stocks_amounts["super-risk"]==0)){
+                                    noStocks.style.display = "block";
+                                }
+                                updateStocksValue();
+                            })
+    
+                        }
+                        else{
+                            document.getElementById("nr_stock_total_income").textContent = stocks_amounts["no-risk"].toLocaleString("en-US");
+                            document.getElementById("nr_stock_num").textContent = (parseFloat(document.getElementById("nr_stock_num").textContent.replace(/[^\d.-]/g, "")) + ATB).toLocaleString("en-US")
+                        }
+                        updateStocksValue();
+                    }
+    
+                    else{
+                        alert("Insufficient capital")
+                    }
+                }else{
+                    alert("You can only type positive numbers")
+                }
+
+
+            })
+
+
+            buyRStock.addEventListener("click", function(){
+
+                ATB = parseFloat(PA_R.value);
+
+                if(ATB > 0){
+                    if(money >= ATB){
+
+                        money = money-ATB
+    
+                        stocks_amounts["risk"] += ATB;
+    
+                        if (stocks_amounts["risk"] == ATB){
+    
+                            noStocks.style.display = "none";
+    
+                            newDivStocks = document.createElement("div");
+    
+                            newDivStocks.setAttribute("id", "r_stock_adquired")
+    
+                            newDivStocks.innerHTML = "<div class='bank-single-asset'><div><i>Risk Stock</i> (<div id='r_stock_num' class='num_assets'>"+(stocks_amounts["risk"]).toLocaleString("en-US")+"</div>$)</div> <div class='benefits' style='color: black; display: flex; align-items: center;'><div id='r_stock_total_income' class='total_income_assets'>"+(stocks_amounts["risk"]).toLocaleString("en-US")+"</div>$ (<b id='variation_r_stock'></b>)<div id='sell_r_stocks' class='button_sell_stock'>Sell</div></div></div>"
+    
+                            stocksDiv.appendChild(newDivStocks)
+    
+                            document.getElementById("variation_r_stock").textContent = (stocks_amounts["risk"]-parseFloat(document.getElementById("r_stock_num").textContent.replace(/[^\d.-]/g, ""))).toLocaleString("en-US")+"$"
+    
+                            document.getElementById("sell_r_stocks").addEventListener("click", function(){
+                                money += stocks_amounts["risk"];
+                                stocks_amounts["risk"] = 0;
+                                document.getElementById("r_stock_adquired").remove();
+                                if((stocks_amounts["basic"]==0) && (stocks_amounts["no-risk"]==0) && (stocks_amounts["risk"]==0) && (stocks_amounts["super-risk"]==0)){
+                                    noStocks.style.display = "block";
+                                }
+                                updateStocksValue();
+                            })
+    
+                        }
+                        else{
+                            document.getElementById("r_stock_total_income").textContent = stocks_amounts["risk"].toLocaleString("en-US");
+                            document.getElementById("r_stock_num").textContent = (parseFloat(document.getElementById("r_stock_num").textContent.replace(/[^\d.-]/g, "")) + ATB).toLocaleString("en-US")
+                        }
+                        updateStocksValue();
+                    }
+    
+                    else{
+                        alert("Insufficient capital")
+                    }
+                }else{
+                    alert("You can only type positive numbers")
+                }
+
+
+            })
+
+
+            buySRStock.addEventListener("click", function(){
+
+                ATB = parseFloat(PA_SR.value);
+
+                if(ATB > 0){
+                    if(money >= ATB){
+
+                        money = money-ATB
+    
+                        stocks_amounts["super-risk"] += ATB;
+    
+                        if (stocks_amounts["super-risk"] == ATB){
+    
+                            noStocks.style.display = "none";
+    
+                            newDivStocks = document.createElement("div");
+    
+                            newDivStocks.setAttribute("id", "sr_stock_adquired")
+    
+                            newDivStocks.innerHTML = "<div class='bank-single-asset'><div><i>Super Risk Stock</i> (<div id='sr_stock_num' class='num_assets'>"+(stocks_amounts["super-risk"]).toLocaleString("en-US")+"</div>$)</div> <div class='benefits' style='color: black; display: flex; align-items: center;'><div id='sr_stock_total_income' class='total_income_assets'>"+(stocks_amounts["super-risk"]).toLocaleString("en-US")+"</div>$ (<b id='variation_sr_stock'></b>)<div id='sell_sr_stocks' class='button_sell_stock'>Sell</div></div></div>"
+    
+                            stocksDiv.appendChild(newDivStocks)
+    
+                            document.getElementById("variation_sr_stock").textContent = (stocks_amounts["super-risk"]-parseFloat(document.getElementById("sr_stock_num").textContent.replace(/[^\d.-]/g, ""))).toLocaleString("en-US")+"$"
+    
+                            document.getElementById("sell_sr_stocks").addEventListener("click", function(){
+                                money += stocks_amounts["super-risk"];
+                                stocks_amounts["super-risk"] = 0;
+                                document.getElementById("sr_stock_adquired").remove();
+                                if((stocks_amounts["basic"]==0) && (stocks_amounts["no-risk"]==0) && (stocks_amounts["risk"]==0) && (stocks_amounts["super-risk"]==0)){
+                                    noStocks.style.display = "block";
+                                }
+                                updateStocksValue();
+                            })
+    
+                        }
+                        else{
+                            document.getElementById("sr_stock_total_income").textContent = stocks_amounts["super-risk"].toLocaleString("en-US");
+                            document.getElementById("sr_stock_num").textContent = (parseFloat(document.getElementById("sr_stock_num").textContent.replace(/[^\d.-]/g, "")) + ATB).toLocaleString("en-US")
+                        }
+                        updateStocksValue();
+                    }
+    
+                    else{
+                        alert("Insufficient capital")
+                    }
+                }else{
+                    alert("You can only type positive numbers")
+                }
+
+
+            })
+
+
+
+
+
+
+        </script>
+
+        </body>
+    </html>
