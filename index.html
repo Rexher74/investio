@@ -107,6 +107,60 @@
                 font-size: 20px;
             }
 
+            #casino-elements{
+                border-top: 1px black solid;
+            }
+
+            #crypto-elements{
+                border-top: 1px black solid;
+            }
+
+            .casino-button{
+                background-color: rgb(160, 110, 0);
+                border-color: rgb(160, 110, 0);
+            }
+
+            .casino-button:hover{
+                background-color: white;
+                color: rgb(160, 110, 0);
+            }
+
+            #casino-result-div{
+                min-height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .casino-result{
+                text-align: center;
+                padding: 15px;
+                font-size: 22px;
+                font-weight: 700;
+            }
+
+            #no-casino-result{
+                text-align: center;
+                padding: 20px;
+                font-size: 20px;
+            }
+
+            #total-crypto-value{
+                width: 80%;
+                box-sizing: border-box;
+                border-top: 1px solid black;
+                text-align: center;
+                color: green;
+                font-size: 30px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            #no-crypto{
+                text-align: center;
+                padding: 20px;
+                font-size: 20px;
+            }
 
             .buy-button{
                 background-color: rgb(0, 105, 0);
@@ -246,6 +300,34 @@
                     </tr>
                 </table>
                 </div>
+                <div class="sub-header">Casino</div>
+                <div id="casino-elements">
+                <table style="width: 100%;">
+                    <tr class="element-to-buy">
+                            <td>Coin Flip</td> <td class="stocks-pc"><div style="color:green; font-weight: 800;">50% --> x1.9</div><div style="color:red; font-weight: 800;">50% --> Lose</div></td><td><div id="button-coinflip" class="buy-button casino-button">Play</div></td><td><input class="main_input_amount" type="number" min="10" value="100" id="coinflip_bet_amount"><b style="font-size: 15px; font-weight: normal;">$</b></td>
+                    </tr>
+                    <tr class="element-to-buy">
+                            <td>Slots</td> <td class="stocks-pc"><div style="color:green; font-weight: 800;">20% --> x3</div><div style="color:red; font-weight: 800;">80% --> Lose</div></td><td><div id="button-slots" class="buy-button casino-button">Play</div></td><td><input class="main_input_amount" type="number" min="10" value="100" id="slots_bet_amount"><b style="font-size: 15px; font-weight: normal;">$</b></td>
+                    </tr>
+                    <tr class="element-to-buy">
+                            <td>Jackpot</td> <td class="stocks-pc"><div style="color:green; font-weight: 800;">5% --> x10</div><div style="color:red; font-weight: 800;">95% --> Lose</div></td><td><div id="button-jackpot" class="buy-button casino-button">Play</div></td><td><input class="main_input_amount" type="number" min="10" value="100" id="jackpot_bet_amount"><b style="font-size: 15px; font-weight: normal;">$</b></td>
+                    </tr>
+                </table>
+                </div>
+                <div class="sub-header">Crypto Market</div>
+                <div id="crypto-elements">
+                <table style="width: 100%;">
+                    <tr class="element-to-buy">
+                            <td>Bitcoin</td> <td class="stocks-pc"><div style="color:green; font-weight: 800;">55% --> +0.5%</div><div style="color:red; font-weight: 800;">45% --> -0.3%</div></td><td><div id="button-buy-btc" class="buy-button">Buy</div></td><td><input class="main_input_amount" type="number" min="50" value="50" id="btc_purshase_amount"><b style="font-size: 15px; font-weight: normal;">$</b></td>
+                    </tr>
+                    <tr class="element-to-buy">
+                            <td>Ethereum</td> <td class="stocks-pc"><div style="color:green; font-weight: 800;">60% --> +0.4%</div><div style="color:red; font-weight: 800;">40% --> -0.25%</div></td><td><div id="button-buy-eth" class="buy-button">Buy</div></td><td><input class="main_input_amount" type="number" min="50" value="50" id="eth_purshase_amount"><b style="font-size: 15px; font-weight: normal;">$</b></td>
+                    </tr>
+                    <tr class="element-to-buy">
+                            <td>DogeCoin</td> <td class="stocks-pc"><div style="color:green; font-weight: 800;">30% --> +2%</div><div style="color:red; font-weight: 800;">70% --> -0.5%</div></td><td><div id="button-buy-doge" class="buy-button">Buy</div></td><td><input class="main_input_amount" type="number" min="50" value="50" id="doge_purshase_amount"><b style="font-size: 15px; font-weight: normal;">$</b></td>
+                    </tr>
+                </table>
+                </div>
             </div>
 
             <div id="right-div">
@@ -264,6 +346,21 @@
                         <div id="no-stocks"><i>No stocks for the moment...</i></div>
                     </div>
                     <div id="total-stocks-value">
+                        0$
+                    </div>
+                </div>
+                <div class="sub-header">Casino</div>
+                <div class="income-stocks-elements-div">
+                    <div id="casino-result-div">
+                        <div id="no-casino-result"><i>No bets placed yet...</i></div>
+                    </div>
+                </div>
+                <div class="sub-header">Crypto</div>
+                <div class="income-stocks-elements-div">
+                    <div id="crypto-div">
+                        <div id="no-crypto"><i>No crypto for the moment...</i></div>
+                    </div>
+                    <div id="total-crypto-value">
                         0$
                     </div>
                 </div>
@@ -623,6 +720,58 @@
                     }
                 }
                 updateStocksValue();
+
+                //CRYPTO
+
+                if (crypto_amounts["btc"] != 0){
+                    if (Math.random() >= 0.45){
+                        crypto_amounts["btc"] = crypto_amounts["btc"]*1.005
+                    } else {
+                        crypto_amounts["btc"] = crypto_amounts["btc"]*0.997
+                    }
+                    document.getElementById("btc_total_value").textContent = crypto_amounts["btc"].toLocaleString("en-US");
+                    VBTC = crypto_amounts["btc"] - parseFloat(document.getElementById("btc_num").textContent.replace(/[^\d.-]/g, ""))
+                    if (VBTC >= 0){
+                        document.getElementById("variation_btc").style.color = "green"
+                        document.getElementById("variation_btc").textContent = "+"+VBTC.toLocaleString("en-US")+"$"
+                    } else {
+                        document.getElementById("variation_btc").style.color = "red"
+                        document.getElementById("variation_btc").textContent = VBTC.toLocaleString("en-US")+"$"
+                    }
+                }
+                if (crypto_amounts["eth"] != 0){
+                    if (Math.random() >= 0.4){
+                        crypto_amounts["eth"] = crypto_amounts["eth"]*1.004
+                    } else {
+                        crypto_amounts["eth"] = crypto_amounts["eth"]*0.9975
+                    }
+                    document.getElementById("eth_total_value").textContent = crypto_amounts["eth"].toLocaleString("en-US");
+                    VETH = crypto_amounts["eth"] - parseFloat(document.getElementById("eth_num").textContent.replace(/[^\d.-]/g, ""))
+                    if (VETH >= 0){
+                        document.getElementById("variation_eth").style.color = "green"
+                        document.getElementById("variation_eth").textContent = "+"+VETH.toLocaleString("en-US")+"$"
+                    } else {
+                        document.getElementById("variation_eth").style.color = "red"
+                        document.getElementById("variation_eth").textContent = VETH.toLocaleString("en-US")+"$"
+                    }
+                }
+                if (crypto_amounts["doge"] != 0){
+                    if (Math.random() >= 0.7){
+                        crypto_amounts["doge"] = crypto_amounts["doge"]*1.02
+                    } else {
+                        crypto_amounts["doge"] = crypto_amounts["doge"]*0.995
+                    }
+                    document.getElementById("doge_total_value").textContent = crypto_amounts["doge"].toLocaleString("en-US");
+                    VDOGE = crypto_amounts["doge"] - parseFloat(document.getElementById("doge_num").textContent.replace(/[^\d.-]/g, ""))
+                    if (VDOGE >= 0){
+                        document.getElementById("variation_doge").style.color = "green"
+                        document.getElementById("variation_doge").textContent = "+"+VDOGE.toLocaleString("en-US")+"$"
+                    } else {
+                        document.getElementById("variation_doge").style.color = "red"
+                        document.getElementById("variation_doge").textContent = VDOGE.toLocaleString("en-US")+"$"
+                    }
+                }
+                updateCryptoValue();
             }
             
             
@@ -874,6 +1023,239 @@
 
 
 
+
+
+
+            //CASINO
+
+            var casinoResultDiv = document.getElementById("casino-result-div");
+            var noCasinoResult = document.getElementById("no-casino-result");
+
+            var coinflipBetAmount = document.getElementById("coinflip_bet_amount");
+            var slotsBetAmount = document.getElementById("slots_bet_amount");
+            var jackpotBetAmount = document.getElementById("jackpot_bet_amount");
+
+            var buyCoinFlip = document.getElementById("button-coinflip");
+            var buySlots = document.getElementById("button-slots");
+            var buyJackpot = document.getElementById("button-jackpot");
+
+            function showCasinoResult(net, bet){
+                noCasinoResult.style.display = "none";
+                var resultEl = document.getElementById("casino-last-result");
+                if (!resultEl){
+                    resultEl = document.createElement("div");
+                    resultEl.setAttribute("id", "casino-last-result");
+                    resultEl.setAttribute("class", "casino-result");
+                    casinoResultDiv.appendChild(resultEl);
+                }
+                if (net >= 0){
+                    resultEl.style.color = "green";
+                    resultEl.textContent = "\uD83C\uDF89 You won +" + (Math.round(net*100)/100).toLocaleString("en-US") + "$!";
+                } else {
+                    resultEl.style.color = "red";
+                    resultEl.textContent = "\uD83D\uDE1E You lost -" + (Math.round(Math.abs(bet)*100)/100).toLocaleString("en-US") + "$";
+                }
+            }
+
+            buyCoinFlip.addEventListener("click", function(){
+                var bet = parseFloat(coinflipBetAmount.value);
+                if (bet > 0){
+                    if (money >= bet){
+                        money -= bet;
+                        if (Math.random() >= 0.5){
+                            var winAmount = Math.round(bet*1.9*100)/100;
+                            money += winAmount;
+                            showCasinoResult(winAmount - bet, bet);
+                        } else {
+                            showCasinoResult(-bet, bet);
+                        }
+                        bankMoneyDiv.textContent = parseFloat((Math.round(money*100))/100).toLocaleString("en-US");
+                    } else {
+                        alert("Insufficient capital");
+                    }
+                } else {
+                    alert("You can only type positive numbers");
+                }
+            })
+
+            buySlots.addEventListener("click", function(){
+                var bet = parseFloat(slotsBetAmount.value);
+                if (bet > 0){
+                    if (money >= bet){
+                        money -= bet;
+                        if (Math.random() >= 0.8){
+                            var winAmount = Math.round(bet*3*100)/100;
+                            money += winAmount;
+                            showCasinoResult(winAmount - bet, bet);
+                        } else {
+                            showCasinoResult(-bet, bet);
+                        }
+                        bankMoneyDiv.textContent = parseFloat((Math.round(money*100))/100).toLocaleString("en-US");
+                    } else {
+                        alert("Insufficient capital");
+                    }
+                } else {
+                    alert("You can only type positive numbers");
+                }
+            })
+
+            buyJackpot.addEventListener("click", function(){
+                var bet = parseFloat(jackpotBetAmount.value);
+                if (bet > 0){
+                    if (money >= bet){
+                        money -= bet;
+                        if (Math.random() >= 0.95){
+                            var winAmount = Math.round(bet*10*100)/100;
+                            money += winAmount;
+                            showCasinoResult(winAmount - bet, bet);
+                        } else {
+                            showCasinoResult(-bet, bet);
+                        }
+                        bankMoneyDiv.textContent = parseFloat((Math.round(money*100))/100).toLocaleString("en-US");
+                    } else {
+                        alert("Insufficient capital");
+                    }
+                } else {
+                    alert("You can only type positive numbers");
+                }
+            })
+
+
+            //CRYPTO MARKET
+
+            var crypto_amounts = {
+                "btc" : 0,
+                "eth" : 0,
+                "doge" : 0
+            }
+
+            var VBTC;
+            var VETH;
+            var VDOGE;
+
+            var buyBTC = document.getElementById("button-buy-btc");
+            var buyETH = document.getElementById("button-buy-eth");
+            var buyDOGE = document.getElementById("button-buy-doge");
+
+            var PA_BTC = document.getElementById("btc_purshase_amount");
+            var PA_ETH = document.getElementById("eth_purshase_amount");
+            var PA_DOGE = document.getElementById("doge_purshase_amount");
+
+            var cryptoDiv = document.getElementById("crypto-div");
+            var noCrypto = document.getElementById("no-crypto");
+            var newDivCrypto;
+
+            var totalCryptoValue = document.getElementById("total-crypto-value");
+
+            function updateCryptoValue(){
+                var tcv = Math.round(((crypto_amounts["btc"]) + (crypto_amounts["eth"]) + (crypto_amounts["doge"]))*100)/100;
+                totalCryptoValue.textContent = tcv.toLocaleString("en-US")+"$";
+            }
+
+            buyBTC.addEventListener("click", function(){
+                ATB = parseFloat(PA_BTC.value);
+                if (ATB > 0){
+                    if (money >= ATB){
+                        money = money-ATB;
+                        crypto_amounts["btc"] += ATB;
+                        if (crypto_amounts["btc"] == ATB){
+                            noCrypto.style.display = "none";
+                            newDivCrypto = document.createElement("div");
+                            newDivCrypto.setAttribute("id", "btc_adquired");
+                            newDivCrypto.innerHTML = "<div class=\'bank-single-asset\'><div><i>Bitcoin</i> (<div id=\'btc_num\' class=\'num_assets\'>"+(crypto_amounts["btc"]).toLocaleString("en-US")+"</div>$)</div> <div class=\'benefits\' style=\'color: black; display: flex; align-items: center;\'><div id=\'btc_total_value\' class=\'total_income_assets\'>"+(crypto_amounts["btc"]).toLocaleString("en-US")+"</div>$ (<b id=\'variation_btc\'></b>)<div id=\'sell_btc\' class=\'button_sell_stock\'>Sell</div></div></div>";
+                            cryptoDiv.appendChild(newDivCrypto);
+                            document.getElementById("variation_btc").textContent = "0$";
+                            document.getElementById("sell_btc").addEventListener("click", function(){
+                                money += crypto_amounts["btc"];
+                                crypto_amounts["btc"] = 0;
+                                document.getElementById("btc_adquired").remove();
+                                if((crypto_amounts["btc"]==0) && (crypto_amounts["eth"]==0) && (crypto_amounts["doge"]==0)){
+                                    noCrypto.style.display = "block";
+                                }
+                                updateCryptoValue();
+                            })
+                        } else {
+                            document.getElementById("btc_total_value").textContent = crypto_amounts["btc"].toLocaleString("en-US");
+                            document.getElementById("btc_num").textContent = (parseFloat(document.getElementById("btc_num").textContent.replace(/[^\d.-]/g, "")) + ATB).toLocaleString("en-US");
+                        }
+                        updateCryptoValue();
+                    } else {
+                        alert("Insufficient capital");
+                    }
+                } else {
+                    alert("You can only type positive numbers");
+                }
+            })
+
+            buyETH.addEventListener("click", function(){
+                ATB = parseFloat(PA_ETH.value);
+                if (ATB > 0){
+                    if (money >= ATB){
+                        money = money-ATB;
+                        crypto_amounts["eth"] += ATB;
+                        if (crypto_amounts["eth"] == ATB){
+                            noCrypto.style.display = "none";
+                            newDivCrypto = document.createElement("div");
+                            newDivCrypto.setAttribute("id", "eth_adquired");
+                            newDivCrypto.innerHTML = "<div class=\'bank-single-asset\'><div><i>Ethereum</i> (<div id=\'eth_num\' class=\'num_assets\'>"+(crypto_amounts["eth"]).toLocaleString("en-US")+"</div>$)</div> <div class=\'benefits\' style=\'color: black; display: flex; align-items: center;\'><div id=\'eth_total_value\' class=\'total_income_assets\'>"+(crypto_amounts["eth"]).toLocaleString("en-US")+"</div>$ (<b id=\'variation_eth\'></b>)<div id=\'sell_eth\' class=\'button_sell_stock\'>Sell</div></div></div>";
+                            cryptoDiv.appendChild(newDivCrypto);
+                            document.getElementById("variation_eth").textContent = "0$";
+                            document.getElementById("sell_eth").addEventListener("click", function(){
+                                money += crypto_amounts["eth"];
+                                crypto_amounts["eth"] = 0;
+                                document.getElementById("eth_adquired").remove();
+                                if((crypto_amounts["btc"]==0) && (crypto_amounts["eth"]==0) && (crypto_amounts["doge"]==0)){
+                                    noCrypto.style.display = "block";
+                                }
+                                updateCryptoValue();
+                            })
+                        } else {
+                            document.getElementById("eth_total_value").textContent = crypto_amounts["eth"].toLocaleString("en-US");
+                            document.getElementById("eth_num").textContent = (parseFloat(document.getElementById("eth_num").textContent.replace(/[^\d.-]/g, "")) + ATB).toLocaleString("en-US");
+                        }
+                        updateCryptoValue();
+                    } else {
+                        alert("Insufficient capital");
+                    }
+                } else {
+                    alert("You can only type positive numbers");
+                }
+            })
+
+            buyDOGE.addEventListener("click", function(){
+                ATB = parseFloat(PA_DOGE.value);
+                if (ATB > 0){
+                    if (money >= ATB){
+                        money = money-ATB;
+                        crypto_amounts["doge"] += ATB;
+                        if (crypto_amounts["doge"] == ATB){
+                            noCrypto.style.display = "none";
+                            newDivCrypto = document.createElement("div");
+                            newDivCrypto.setAttribute("id", "doge_adquired");
+                            newDivCrypto.innerHTML = "<div class=\'bank-single-asset\'><div><i>DogeCoin</i> (<div id=\'doge_num\' class=\'num_assets\'>"+(crypto_amounts["doge"]).toLocaleString("en-US")+"</div>$)</div> <div class=\'benefits\' style=\'color: black; display: flex; align-items: center;\'><div id=\'doge_total_value\' class=\'total_income_assets\'>"+(crypto_amounts["doge"]).toLocaleString("en-US")+"</div>$ (<b id=\'variation_doge\'></b>)<div id=\'sell_doge\' class=\'button_sell_stock\'>Sell</div></div></div>";
+                            cryptoDiv.appendChild(newDivCrypto);
+                            document.getElementById("variation_doge").textContent = "0$";
+                            document.getElementById("sell_doge").addEventListener("click", function(){
+                                money += crypto_amounts["doge"];
+                                crypto_amounts["doge"] = 0;
+                                document.getElementById("doge_adquired").remove();
+                                if((crypto_amounts["btc"]==0) && (crypto_amounts["eth"]==0) && (crypto_amounts["doge"]==0)){
+                                    noCrypto.style.display = "block";
+                                }
+                                updateCryptoValue();
+                            })
+                        } else {
+                            document.getElementById("doge_total_value").textContent = crypto_amounts["doge"].toLocaleString("en-US");
+                            document.getElementById("doge_num").textContent = (parseFloat(document.getElementById("doge_num").textContent.replace(/[^\d.-]/g, "")) + ATB).toLocaleString("en-US");
+                        }
+                        updateCryptoValue();
+                    } else {
+                        alert("Insufficient capital");
+                    }
+                } else {
+                    alert("You can only type positive numbers");
+                }
+            })
 
 
         </script>
